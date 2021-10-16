@@ -1,0 +1,29 @@
+@startuml
+
+cloud "Social Media Feed" as SOC 
+component "Hate Diffuser" as MAIN {
+    component "Chat bot" as C1 {
+        component "Crawler" as C1A 
+        component "Responder" as C1B
+    }
+    'component "Identity Hash" as C2 
+    component "Indicent Hate Analysis" as C3
+    database "Prior Incidents" as C4
+    
+    component "Content Picker" as C7 
+
+    database "Counter Media Library" as C6
+}
+
+SOC -right-> C1A : Scan for online hate incidents
+C1B -left-> SOC  
+
+C1A -down-> C3 
+
+C3 <..> C4 : read write
+C3 --> C7
+C6 .left-> C7
+
+C7 -up-> C1B 
+
+@enduml
