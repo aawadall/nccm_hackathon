@@ -15,11 +15,14 @@ component "Hate Diffuser" as MAIN {
     database "Counter Media Library" as C6
 }
 
+component "human response" as hum 
+
 SOC -right-> C1A : Scan for online hate incidents
 C1B -left-> SOC  
 
 C1A -down-> C3 
-
+C7 ..> hum : notify 
+hum -up-> SOC : human response 
 C3 <..> C4 : read write
 C3 --> C7
 C6 .left-> C7

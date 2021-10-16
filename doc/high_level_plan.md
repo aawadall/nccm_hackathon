@@ -37,3 +37,15 @@ T = [
 ]
 
 this will;  send out response -> r = [3, 2, 0] 
+
+
+####  Example Vulnerable Groups
+* Muslims 
+* Women 
+* Immigrants 
+
+Type        | Escalation 1 | Escalation 2 
+------------|--------------|----------
+Muslims     | Contribution of Muslims in Canada | Notable Muslims in the community 
+Women       | Myths about women | You couldn't exist without a mom 
+Immigrants  | |
