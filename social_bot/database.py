@@ -1,6 +1,9 @@
 """Mock in memory database simulating actual db"""
 
 
+import datetime
+
+
 class Database:
     # fields
     # tuple of (user, timestamp, tweet)
@@ -13,9 +16,14 @@ class Database:
         self.violations = []
 
     # methods
-    def store_tweet(self, user, timestamp, tweet):
+    def store_tweet(self, user, stimestamp, tweet):
         """Saves a tweet to tweets"""
-        self.tweets.append((user, timestamp, tweet))
+        # convert string timestamp to datetime in format 2021-10-16 19:13:02.331908
+        timestamp = datetime.datetime.strptime(
+            stimestamp, '%Y-%m-%d %H:%M:%S.%f')
+
+        self.tweets.append(
+            (user, timestamp, tweet))
 
     def get_tweets(self, user=None):
         """Returns all tweets for a user if provided, otherwise all"""
@@ -26,6 +34,7 @@ class Database:
 
     def store_violation(self, user, timestamp, violation):
         """Saves a violation to violations"""
+
         self.violations.append((user, timestamp, violation))
 
     def get_violations(self, user=None):
@@ -33,4 +42,6 @@ class Database:
         if user is None:
             return self.violations
         else:
-            return [violation for violation in self.violations if violation[0] == user]
+            violations = [
+                violation for violation in self.violations if violation[0] == user]
+            return violations

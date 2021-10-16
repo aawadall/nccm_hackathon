@@ -1,6 +1,7 @@
 """Hate Incident Analyzer"""
 
 
+import datetime
 from os import urandom
 from operator import itemgetter
 
@@ -30,13 +31,22 @@ class HateIncidentAnalyzer:
         print('Time Weighted Analysis')
         # violations made of a list of user, timestamp, and violations
         # use most recent violation as baseline (maximum timestamp)
-        baseline = max(violations, key=itemgetter(1))[0]
-
+        baseline = get_time_from_string(max(violations, key=itemgetter(1))[1])
+        print('Baseline: {}'.format(baseline))
         # for each violation, calculate weight and multiply by violation
         weighted_violations = [0] * len(self.topics)
         for violation in violations:
-            delta_t = baseline - violation[1]
-            weighted_violations = weighted_violations + \
-                [violation * (self.discount_factor ** delta_t)]
+            print('Calculating weight for violation: {}'.format(violation))
+            delta_t = baseline - get_time_from_string(violation[1])
+            discount = self.discount_factor ** (float(delta_t.seconds)/60)
+            el = [v * discount for v in violation]
+            weighted_violations = weighted_violations + el
         # return sum of weights
         return weighted_violations
+
+
+def get_time_from_string(stimestamp):
+    """From string timestamp return datetime"""
+    timestamp = datetime.datetime.strptime(
+        stimestamp, '%Y-%m-%d %H:%M:%S.%f')
+    return timestamp

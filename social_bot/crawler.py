@@ -4,6 +4,7 @@ TODO: Read from kafka stream and check ths score via incident analyzer
 from database import Database
 from incident_analyzer import HateIncidentAnalyzer
 from thresholds import *
+import json
 
 # Kafka
 from kafka import KafkaConsumer
@@ -72,20 +73,19 @@ def main():
         # log
         log_message(message)
         # get score vector
-        tweet = get_tweet(message.value)
-        handle = get_handle(message.value)
-        timestamp = get_timestamp(message.value)
+        tweet = get_tweet(json.loads(message.value))
+        handle = get_handle(json.loads(message.value))
+        timestamp = get_timestamp(json.loads(message.value))
 
         # store in database
         db.store_tweet(handle, timestamp, tweet)
 
-        current_score = ia.analyze_tweet(tweet)
+        current_score = ia.analyze_incident(tweet)
 
         db.store_violation(handle, timestamp, current_score)
 
         # run time weighted analysis
-        weighted_score = ia.time_weighted_analysis(
-            handle, db.get_violations(handle))
+        weighted_score = ia.time_weighted_analysis(db.get_violations(handle))
 
         # intial response
         initial_response = get_escalations(weighted_score)

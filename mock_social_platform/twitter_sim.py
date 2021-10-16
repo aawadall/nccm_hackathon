@@ -1,6 +1,7 @@
 """Twitter simulator"""
 
 import datetime
+import json
 # Kafka imports
 from kafka import KafkaProducer
 from kafka import KafkaConsumer
@@ -43,11 +44,11 @@ def main():
             # make payload
             timestamp = str(datetime.datetime.now())
 
-            payload = {
+            payload = json.dumps({
                 "tweet": tweet,
                 "handle": handle,
                 "timestamp": timestamp
-            }
+            })
 
             print("Sending tweet: ", payload)
             # send payload to kafka
