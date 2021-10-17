@@ -54,9 +54,10 @@ def main():
             # send payload to kafka
             producer.send(topics['twitter'], value=payload)
 
-        # read response from kafka
-        for msg in consumer:
-            print(msg.value)
+        # if any message at consumer, read one and continue
+        for message in consumer:
+            print("Received response: ", message.value.decode('utf-8'))
+            break
 
 
 if __name__ == "__main__":
