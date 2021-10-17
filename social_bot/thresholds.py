@@ -2,9 +2,9 @@
 
 hate_categories = ['islamophobia', 'anti-black', 'anti-woman']
 
-escalation_matrix = [[0.1, 0.1, 0.1],
-                     [0.2, 0.15, 0.11],
-                     [0.4, 0.3, 0.22]]
+escalation_matrix = [[0.4, 0.2, 0.1],
+                     [0.8, 0.5, 0.11],
+                     [1.4, 0.73, 0.22]]
 
 media_library = {
     0: ['Islamophobia response 1', 'Islamophobia response 2', 'Islamophobia response 3'],
