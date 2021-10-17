@@ -34,11 +34,11 @@ def get_escalations(violations):
                 escalation_levels.append(idx)
         print('escalation levels')
         print(escalation_levels)
-        escalation_level = 0
+        escalation_level = -1
         if len(escalation_levels) > 0:
             escalation_level = escalation_levels[-1]
         print(escalation_level)
-        if escalation_level > 0:
+        if escalation_level >= 0:
             msg = media_library[category][escalation_level]
             result[hate_categories[category]] = {
                 "level": escalation_level,

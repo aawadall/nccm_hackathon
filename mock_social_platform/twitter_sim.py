@@ -2,6 +2,7 @@
 
 import datetime
 import json
+import time
 # Kafka imports
 from kafka import KafkaProducer
 from kafka import KafkaConsumer
@@ -54,6 +55,8 @@ def main():
             # send payload to kafka
             producer.send(topics['twitter'], value=payload)
 
+        # add some delay
+        time.sleep(1)
         # peek messages from kafka
         msg = consumer.poll(timeout_ms=100)
         if msg:
