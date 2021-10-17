@@ -67,7 +67,7 @@ def main():
 
     # Database init
     db = Database()
-    ia = HateIncidentAnalyzer(hate_categories, 0.9)
+    ia = HateIncidentAnalyzer(hate_categories, 0.8)
     # Consumer loop
     for message in consumer:
         # log

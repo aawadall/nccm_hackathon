@@ -10,9 +10,9 @@ from operator import add
 class HateIncidentAnalyzer:
     """Hate Incident Analyzer"""
     lookup_table = {
-        'women belong to kitchen': [0.0, 0.0, 0.1],
         'muslims are terrorists': [0.1, 0.0, 0.0],
-        'i hate black people': [0.0, 0.1, 0.0]
+        'i hate black people': [0.0, 0.1, 0.0],
+        'women belong to kitchen': [0.0, 0.0, 0.1],
     }
 
     def __init__(self, topics, discount_factor=0.9):

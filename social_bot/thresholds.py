@@ -2,9 +2,9 @@
 
 hate_categories = ['islamophobia', 'anti-black', 'anti-woman']
 
-escalation_matrix = [[0.4, 0.2, 0.1],
-                     [0.8, 0.5, 0.11],
-                     [1.4, 0.73, 0.22]]
+escalation_matrix = [[0.1, 0.3, 0.5],
+                     [0.1, 0.3, 0.5],
+                     [0.1, 0.3, 0.5]]
 
 media_library = {
     0: ['Islamophobia response 1', 'Islamophobia response 2', 'Islamophobia response 3'],
@@ -22,13 +22,18 @@ def get_escalations(violations):
     print(violations)
     for violation in violations:
         # take a slice of the escalation matrix
-        print(violation)
+        print("violation:", violation)
         escalation_slice = escalation_matrix[category]
         # find the escalation level where the violation is greater than the threshold and and the next level
         # escalation_level = escalation_slice.index(
         #     max(escalation_slice[:violation]))
-        escalation_levels = [idx for idx in range(
-            len(escalation_slice)) if escalation_slice[idx] < violation]
+        escalation_levels = []
+
+        for idx in range(len(escalation_slice)):
+            if escalation_slice[idx] < violation:
+                escalation_levels.append(idx)
+        print('escalation levels')
+        print(escalation_levels)
         escalation_level = 0
         if len(escalation_levels) > 0:
             escalation_level = escalation_levels[-1]
