@@ -38,7 +38,7 @@ def main():
     # Twitter simulator
     while end_flag == False:
         # read tweets from console
-        tweet = input("{handle} Enter tweet: ")
+        tweet = input("@"+handle + " Enter tweet: ")
         if tweet == "end":
             end_flag = True
         else:
