@@ -97,13 +97,13 @@ def main():
                 # send response to human feed
                 human_feed_producer.send(
                     topic=topics['human-feed'],
-                    value=value.response
+                    value=value['response']
                 )
 
                 # send response to response topic
                 response_producer.send(
                     topic=topics['response'],
-                    value=value.response
+                    value=value['response']
                 )
 
 
