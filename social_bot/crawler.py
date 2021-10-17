@@ -92,17 +92,19 @@ def main():
 
         # if score is above threshold
         if (initial_response != None):
-            # send response to human feed
-            human_feed_producer.send(
-                topics['human-feed'],
-                value=initial_response
-            )
+            # iterate through dictionary
+            for key, value in initial_response.items():
+                # send response to human feed
+                human_feed_producer.send(
+                    topic=topics['human-feed'],
+                    value=value.response
+                )
 
-            # send response to response topic
-            response_producer.send(
-                topics['response'],
-                value=initial_response
-            )
+                # send response to response topic
+                response_producer.send(
+                    topic=topics['response'],
+                    value=value.response
+                )
 
 
 if __name__ == '__main__':

@@ -27,15 +27,19 @@ def get_escalations(violations):
         # find the escalation level where the violation is greater than the threshold and and the next level
         # escalation_level = escalation_slice.index(
         #     max(escalation_slice[:violation]))
-        escalation_level = [idx for idx in range(
+        escalation_levels = [idx for idx in range(
             len(escalation_slice)) if escalation_slice[idx] < violation]
+        escalation_level = 0
+        if len(escalation_levels) > 0:
+            escalation_level = escalation_levels[-1]
         print(escalation_level)
-        if escalation_level:
+        if escalation_level > 0:
+            msg = media_library[category][escalation_level]
             result[hate_categories[category]] = {
                 "level": escalation_level,
-                "response": media_library[category][escalation_level]}
+                "response": msg}
 
         # increment the category
         category += 1
-
+    print(result)
     return result

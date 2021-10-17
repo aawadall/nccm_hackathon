@@ -22,7 +22,7 @@ class HateIncidentAnalyzer:
         # build some random vector of violations
         violations = [0] * len(self.topics)
         for i in range(len(self.topics)):
-            violations[i] = random.uniform(0, 1)
+            violations[i] = random.uniform(0, 0.2)
             # if self.topics[i] in tweet:
             #     # random number between 0 and 1
             #     violations[i] = 0.5 + random.uniform(0, 1)
