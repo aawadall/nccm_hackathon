@@ -9,6 +9,11 @@ from operator import add
 
 class HateIncidentAnalyzer:
     """Hate Incident Analyzer"""
+    lookup_table = {
+        'women belong to kitchen': [0.0, 0.0, 0.1],
+        'muslims are terrorists': [0.1, 0.0, 0.0],
+        'i hate black people': [0.0, 0.1, 0.0]
+    }
 
     def __init__(self, topics, discount_factor=0.9):
         """Initializes the class"""
@@ -20,9 +25,19 @@ class HateIncidentAnalyzer:
         """Analyzes a tweet for hate incidents, returns a vector of violations"""
         print('Analyzing tweet: {}'.format(tweet))
         # build some random vector of violations
+        # convert tweet to lowercase
+        tweet = tweet.lower()
+
+        # lookup values from lookup table
+        # if not in lookup table, return zeros
         violations = [0] * len(self.topics)
-        for i in range(len(self.topics)):
-            violations[i] = random.uniform(0, 0.2)
+
+        # if tweet in lookup table, return lookup table values
+        if tweet in self.lookup_table:
+            violations = self.lookup_table[tweet]
+
+        # for i in range(len(self.topics)):
+        #     violations[i] = random.uniform(0, 0.2)
             # if self.topics[i] in tweet:
             #     # random number between 0 and 1
             #     violations[i] = 0.5 + random.uniform(0, 1)
